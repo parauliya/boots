@@ -1,0 +1,64 @@
+name: For each commit and PR
+on:
+  push:
+  pull_request:
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: 0
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.14.6'
+    - name: go fmt
+      run: go fmt ./...
+    - name: go vet
+      run: go vet ./...
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v1
+      with:
+        version: v1.30
+    - name: go test
+      run: go test -v ./...    
+    - name: go test coverage
+      run: go test -coverprofile=coverage.txt ./...
+    - name: upload codecov
+      run: bash <(curl -s https://codecov.io/bash)
+    - name: Build binary
+      run: make
+    - name: Upload boots binary
+      uses: actions/upload-artifact@v2
+      with:
+        name: boots
+        path: ./boots
+  docker-images:
+    env:
+      CGO_ENABLED: 0
+    runs-on: ubuntu-latest
+    needs: [validation]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Download boots binary
+      uses: actions/download-artifact@v2
+      with:
+        name: boots
+        path: ./
+    - name: set boots permission
+      run: chmod +x  ./boots
+    - name: quay.io/tinkerbell/boots
+      uses: docker/build-push-action@v2
+      with:
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+        repository: tinkerbell/boots
+        path: ./
+        registry: quay.io
+        push: ${{ startsWith(github.ref, 'refs/heads/master') }}
+        tags: latest
+        tag_with_sha: true
