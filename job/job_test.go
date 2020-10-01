@@ -30,7 +30,7 @@ func TestSetupDiscover(t *testing.T) {
 			Name:     "TestSetupDiscover",
 			Instance: nil,
 			NetworkPorts: []packet.Port{
-				packet.Port{
+				{
 					Type: "ipmi",
 					Data: struct {
 						MAC  *packet.MACAddr `json:"mac"`
@@ -86,7 +86,7 @@ func TestSetupManagement(t *testing.T) {
 			Instance: &packet.Instance{},
 			PlanSlug: "f1.fake.x86",
 			NetworkPorts: []packet.Port{
-				packet.Port{
+				{
 					Type: "ipmi",
 					Data: struct {
 						MAC  *packet.MACAddr `json:"mac"`
@@ -186,7 +186,7 @@ func TestHasActiveWorkflow(t *testing.T) {
 		{name: "test active workflow",
 			wcl: &tw.WorkflowContextList{
 				WorkflowContexts: []*tw.WorkflowContext{
-					&tw.WorkflowContext{
+					{
 						WorkflowId:         "active-fake-workflow-bde9-812726eff314",
 						CurrentActionState: 0,
 					},
@@ -197,7 +197,7 @@ func TestHasActiveWorkflow(t *testing.T) {
 		{name: "test inactive workflow",
 			wcl: &tw.WorkflowContextList{
 				WorkflowContexts: []*tw.WorkflowContext{
-					&tw.WorkflowContext{
+					{
 						WorkflowId:         "inactive-fake-workflow-bde9-812726eff314",
 						CurrentActionState: 1,
 					},

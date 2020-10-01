@@ -127,7 +127,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 			ID:   uuid.New().String(),
 			Name: "TestSetupInstanceHardwareName",
 			NetworkPorts: []packet.Port{
-				packet.Port{
+				{
 					Type: "data",
 					Name: "eth0",
 					Data: struct {
@@ -138,7 +138,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 						Bond: "bond0",
 					},
 				},
-				packet.Port{
+				{
 					Type: "data",
 					Name: "eth1",
 					Data: struct {
@@ -149,7 +149,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 						Bond: "bond0",
 					},
 				},
-				packet.Port{
+				{
 					Type: "data",
 					Name: "eth2",
 					Data: struct {
@@ -160,7 +160,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 						Bond: "bond1",
 					},
 				},
-				packet.Port{
+				{
 					Type: "data",
 					Name: "eth3",
 					Data: struct {
@@ -171,7 +171,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 						Bond: "bond1",
 					},
 				},
-				packet.Port{
+				{
 					Type: "ipmi",
 					Name: "ipmi0",
 					Data: struct {
@@ -186,7 +186,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 				ID:       instanceId,
 				Hostname: "TestSetupInstanceHostname",
 				IPs: []packet.IP{
-					packet.IP{
+					{
 						Address:    net.ParseIP("192.168.100.2"),
 						Gateway:    net.ParseIP("192.168.100.1"),
 						Netmask:    net.ParseIP("192.168.100.255"),
@@ -194,7 +194,7 @@ func MakeHardwareWithInstance() (*packet.DiscoveryCacher, []packet.MACAddr, stri
 						Management: true,
 						Public:     true,
 					},
-					packet.IP{
+					{
 						Address:    net.ParseIP("192.168.200.2"),
 						Gateway:    net.ParseIP("192.168.200.1"),
 						Netmask:    net.ParseIP("192.168.200.255"),
@@ -224,7 +224,7 @@ func MakeHardwareWithoutInstance() (*packet.DiscoveryCacher, packet.MACAddr) {
 			ID:   uuid.New().String(),
 			Name: "TestSetupWithoutInstanceHardwareName",
 			NetworkPorts: []packet.Port{
-				packet.Port{
+				{
 					Type: "data",
 					Name: "eth0",
 					Data: struct {
