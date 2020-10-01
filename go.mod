@@ -22,7 +22,7 @@ require (
 	github.com/tinkerbell/tink v0.0.0-20200806104854-0f947d87c35f
 	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
+	golang.org/x/tools v0.0.0-20201001104356-43ebab892c4c // indirect
 	google.golang.org/grpc v1.29.1
 )
 
